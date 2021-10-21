@@ -1,0 +1,29 @@
+//142. Linked List Cycle II
+
+class Solution
+{
+public:
+    ListNode *detectCycle(ListNode *head)
+    {
+        //floyd cycle detection theorem
+        ListNode *fast = head;
+        ListNode *slow = head;
+
+        while (fast != NULL && fast->next != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast)                     //if true means have cycle
+            {
+                slow = head;                    //index return krni hai isliye
+                while (slow != fast)
+                {
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+                return slow; //as both will be pointing to same node
+            }
+        }
+        return NULL;
+    }
+};
