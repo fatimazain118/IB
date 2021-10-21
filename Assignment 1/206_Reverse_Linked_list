@@ -1,0 +1,22 @@
+NULL->1->2->3->NULL
+ |    \   \
+preptr \   \nextptr              //using these 3 pointers
+        currptr
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* preptr = NULL;
+        ListNode* currptr = head;
+         
+        while(currptr != NULL){
+            ListNode* nextptr= currptr->next;       //curr k next ki value store krlo     
+            
+            currptr->next = preptr;
+            preptr = currptr;
+            currptr = nextptr;
+            }
+       return preptr;
+        
+    }
+};
