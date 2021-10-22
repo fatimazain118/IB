@@ -1,0 +1,25 @@
+class Solution
+{
+public:
+    ListNode *oddEvenList(ListNode *head)
+    {
+        //Boundary Cases
+        if (!head)                         //list is empty
+            return head;
+
+        ListNode *odd = head;                 //these two pointer will update the pointers
+        ListNode *even = head->next;
+        ListNode *odd_head = head;
+        ListNode *even_head = head->next;
+
+        while (even != NULL && even->next != NULL)              //when even & it's next is null
+        {
+            odd->next = odd->next->next;              //updating the pointers, 
+            even->next = even->next->next;
+            odd = odd->next;               //ab ye usse he point krengye jisse odd->next point krra
+            even = even->next;
+        }
+        odd->next = even_head;              //merging both list
+        return head;
+    }
+};
