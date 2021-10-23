@@ -1,0 +1,42 @@
+class Solution
+{
+public:
+    ListNode *reverseKGroup(ListNode *head, int k)
+    {
+        int count = 0;
+        ListNode *dummy = new ListNode();          //dummy node created
+        dummy->next = head;
+
+        ListNode *temp = dummy;
+
+        while (temp->next != NULL) //this is to get the length of the list
+        {
+            temp = temp->next;
+            count++;
+        }
+        temp = dummy;             //redefining
+        while (temp->next != NULL)
+        {
+            if (count < k)
+                break;
+            int node = k - 1;
+            ListNode *tempnext = temp->next;
+            ListNode *first = temp->next;
+            ListNode *second = first->next;
+
+            while (node-- > 0) //reversing the list
+            {
+
+                ListNode *next = second->next;
+                second->next = first;
+                first = second;
+                second = next;
+            }
+            count -= k;
+            temp->next = first;
+            tempnext->next = second;
+            temp = tempnext;
+        }
+        return dummy->next;
+    }
+};
