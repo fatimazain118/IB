@@ -1,0 +1,22 @@
+#doing in two pass
+
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        oldToCopy = {None : None}               #using hashmap old to new(copy)
+        
+        curr = head
+        while curr:                #creating a copy list
+            copy = Node(curr.val)
+            oldToCopy[curr] = copy         #mapping curr node with copy
+            curr = curr.next
+            
+        curr = head
+        while curr:             #asigning pointers to it
+            copy = oldToCopy[curr]
+            copy.next = oldToCopy[curr.next]      #curr.next of original list with be in copy.next
+            copy.random = oldToCopy[curr.random]
+            curr = curr.next
+            
+        return oldToCopy[head] 
+ _________________________________________________________________
+ 
